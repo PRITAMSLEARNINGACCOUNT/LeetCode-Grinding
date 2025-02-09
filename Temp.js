@@ -1,13 +1,23 @@
-var findDuplicate = function (nums) {
-  let Result = 0;
+var countBadPairs = function (nums) {
+  let obj = {};
+  let count = 0;
   nums.forEach((element, index) => {
-    for (let j = index + 1; j < nums.length; j++) {
-      if (element === nums[j]) {
-        Result = element;
-        return element;
-      }
+    obj[index] = element;
+  });
+  Object.keys(obj).forEach((element) => {
+    let IncreasedElement = parseInt(parseInt(element) + 1);
+    console.log(IncreasedElement,element);
+
+    if (IncreasedElement > nums.length) {
+      return;
+    } else if (
+      IncreasedElement - parseInt(element) !==
+      obj[IncreasedElement] - obj[element]
+    ) {
+      count++;
     }
   });
-  return Result;
+  console.log(count);
 };
-console.log(findDuplicate([1, 3, 4, 2, 2]));
+
+countBadPairs([4, 1, 3, 3]);
